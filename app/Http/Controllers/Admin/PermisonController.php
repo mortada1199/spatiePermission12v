@@ -10,9 +10,9 @@ class PermisonController extends Controller
 {
     public function index()
     {
-        $permissons = Permission::all();
+        $permissions = Permission::all();
 
-        return view('admin.permissions.index', compact('permissons'));
+        return view('admin.permissions.index', compact('permissions'));
     }
 
     public function create()
@@ -33,4 +33,34 @@ class PermisonController extends Controller
         return redirect()->route('admin.permissions.index')
             ->with('success', 'Permission created successfully');
     }
+
+    public function edit($id)
+    {
+        $permission = Permission::findOrFail($id);
+
+        return view('admin.permissions.edit', compact('permission'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255|unique:permissions,name,'.$id,
+        ]);
+
+        $permission = Permission::findOrFail($id);
+        $permission->update([
+            'name' => $request->name,
+        ]);
+
+        return redirect()->route('admin.permissions.index')
+            ->with('success', 'Permission updated successfully');
+    }
+    public function destroy($id)
+{
+    $permission = Permission::findOrFail($id);
+    $permission->delete();
+
+    return redirect()->route('admin.permissions.index')
+        ->with('success', 'Permission deleted successfully');
+}
 }
