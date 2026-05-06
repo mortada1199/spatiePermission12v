@@ -15,10 +15,10 @@
                                     A list of all the users in your account including their name, title, email and role.
                                 </p> --}}
                         </div>
-
-                        <button class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm">
+                        <a href="{{ route('admin.permissions.create') }}"
+                            class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm inline-block">
                             Add Permission
-                        </button>
+                        </a>
                     </div>
 
                     <!-- Table -->
@@ -40,7 +40,7 @@
                                     <tr class="hover:bg-gray-800/50 transition">
                                         <!-- Role -->
                                         <td class="py-4 text-gray-300">
-                                           {{ $Permission->name }}
+                                            {{ $Permission->name }}
                                         </td>
 
                                         <!-- Action -->
